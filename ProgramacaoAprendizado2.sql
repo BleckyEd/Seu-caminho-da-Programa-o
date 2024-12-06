@@ -17,6 +17,7 @@ create table material(
     nome varchar(100) not null,
     linguagem varchar(50),
     conteudo varchar(50),
+    	link varchar(1000) not null,
     area varchar(50),
     primary key(id)
 );
@@ -50,20 +51,21 @@ create table livro(
 
 #dudu
 #material_estudo
-insert into material(id,nome,linguagem,conteudo,area) values
+insert into material(id,nome,linguagem,conteudo,area,link) values
         #Fonte "https://www.w3schools.com/python/default.asp"
-        ("ST01"," Tutoriais Python W3Schools","Python",'',''),
+        ("ST01"," Tutoriais Python W3Schools","Python",'','','https://www.w3schools.com/python/default.asp'),
     #Fonte "https://www.w3schools.io/languages/rust-tutorials/"
-    ("ST02","Tutoriais Rust W3Schools.io","Rust",'',''),
+    ("ST02","Tutoriais Rust W3Schools.io","Rust",'','','https://www.w3schools.io/languages/rust-tutorials/'),
     #Fonte "https://www.w3schools.in/cplusplus/tutorials/"
-    ("ST03","Tutoriais C++ W3Schools.in",'','',''),
+    ("ST03","Tutoriais C++ W3Schools.in",'C++','','','https://www.w3schools.in/cplusplus/tutorials/'),
     #Fonte "https://www.amazon.com.br/dp/6555208260?tag=acesso2-20&linkCode=osi&th=1&psc=1&keywords=livros%20computacao%20grafica"
-    ("LV01","Computação Gráfica: Teoria e Prática: Geração de Imagens",'','','Computação Gráfica'),
+    ("LV01","Computação Gráfica: Teoria e Prática: Geração de Imagens",'','','Computação Gráfica','https://www.amazon.com.br/dp/6555208260?tag=acesso2-20&linkCode=osi&th=1&psc=1&keywords=livros%20computacao%20grafica'),
     #Fonte https://www.youtube.com/watch?v=dp0zB4n3MUs
-    ("VD01","O QUE SÃO FRAMEWORKS E BIBLIOTECAS? QUAIS AS DIFERENÇAS?",'' ,"Bibliotecas e Frameworks",''),
+    ("VD01","O QUE SÃO FRAMEWORKS E BIBLIOTECAS? QUAIS AS DIFERENÇAS?",'' ,"Bibliotecas e Frameworks",'','https://www.youtube.com/watch?v=dp0zB4n3MUs'),
     #Fonte https://www.atlassian.com/br/agile/scrum
-    ("ST04","Metodo Scrum",'','Metodologias de Desenvolvimento',''),
-    ("ST05","JavaScipt Tutorial","JavaScript",'','');
+    ("ST04","Metodo Scrum",'','Metodologias de Desenvolvimento','','https://www.atlassian.com/br/agile/scrum'),
+    
+    ("ST05","JavaScipt Tutorial","JavaScript",'','','https://www.w3schools.com/js/');
                                 
 insert into site(dominio,link,mat_estudo_id) values 
         ("w3schools.com","https://www.w3schools.com/python/default.asp","ST01"),
@@ -109,4 +111,3 @@ insert into usuario(nome,senha) values
 
 CREATE USER 'user5'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL ON ProgramaEstudo.* TO 'user5'@'localhost';
-
