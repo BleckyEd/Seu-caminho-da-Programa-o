@@ -22,10 +22,12 @@
             <h1 >Escolha Seu Caminho <?php echo $_GET['nome'];?></h1>
         </header>
         <nav class="full">
-            <a class="a" href="linguagem.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Linguagem</a>
-            <a class="a" href="area.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Área</a>
-            <a class="a" href="conteudo.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Conteúdo</a>
+            <a class="a" href="linguagem.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Linguagem</a>
+            <a class="a" href="area.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Área</a>
+            <a class="a" href="conteudo.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Conteúdo</a>
             <a class="a" href="favorites.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Favoritos</a>
+            <a class="a" href="index.php">Sair</a>
+            <a class="a" href="update.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Mudar Senha</a>
         </nav>
         <article class="flexd mid">
                 <h3>O que verá em Linguaguens:</h3>

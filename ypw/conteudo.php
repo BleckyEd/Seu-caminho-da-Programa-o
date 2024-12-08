@@ -5,12 +5,24 @@
     session_start();
     require_once 'conn.php';
     $nome=$_GET['nome'];
+    $acao=$_GET['acao'];
     $senha=$_GET['senha'];
     $dic = array(
         "LV" => "Livro",
         "ST" => "Site",
         "VD" => "Vídeo"
     );
+    if ($acao=='favoritar'){
+        $id=$_GET['id'];
+        $query = "INSERT INTO usuario_material(nome_us,id_mat) VALUES 
+        ('$nome','$id');";
+        $query_run = mysqli_query($conn, $query);
+    }
+    elseif($acao=='desfavoritar'){
+        $id=$_GET['id'];
+        $query = "DELETE FROM usuario_material where id_mat='$id' and nome_us='$nome';";
+        $query_run = mysqli_query($conn, $query);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +41,8 @@
         </header>
         <nav class="full">
             <a class="a" href="lobby.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Início</a>
-            <a class="a" href="linguagem.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Linguagem</a>
-            <a class="a" href="area.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Área</a>
+            <a class="a" href="linguagem.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Linguagem</a>
+            <a class="a" href="area.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Área</a>
             <a class="a" href="favorites.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Favoritos</a>
         </nav>
         <section class="mid flexc">
@@ -40,6 +52,7 @@
                     <th>Conteúdo</th>
                     <th>Nome</th>
                     <th>Tipo</th>
+                    <th>Favoritar</th>
                 </tr>
                 <tr>
                     <th>
@@ -70,11 +83,25 @@
                         {
                             foreach($query_run as $material)
                             {
+                                $mtn=$material['nome']
                                 ?>
                                 <tr>
                                     <td data-pec="<?= $material['conteudo']; ?>"><?= $material['conteudo']; ?></td>
                                     <td data-mt="<?= $material['nome']; ?>"><a  id="mt" href="<?php echo $material['link']; ?>"><?= $material['nome']; ?></a></td>
                                     <td data-tipo="<?= $dic[substr($material['id'],0,2)]; ?>"><?= $dic[substr($material['id'],0,2)]; ?></td>
+                                    <td>
+                                    <?php
+                                         $query = "SELECT * FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us=usuario.nome and usuario.nome='$nome' and material.nome='$mtn'";
+                                         $query_run = mysqli_query($conn, $query);
+                                         if(mysqli_num_rows($query_run) > 0){?>
+                                            <a id="mt" href="conteudo.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&id=<?php echo $material['id'] ?>&acao=desfavoritar">Desfavoritar</a>
+                                            <?php 
+                                         }else{?>
+                                            <a  id="mt" href="conteudo.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&id=<?= $material['id']?>&acao=favoritar"">Favoritar</a>
+                                           <?php
+                                         } ?>
+                                         
+                                     </td>
                                 </tr>
                                 <?php
                             }

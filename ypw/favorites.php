@@ -11,11 +11,8 @@
         "ST" => "Site",
         "VD" => "Vídeo"
     );
-    $otherdic=array(
-        ""=>""
-    )
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,16 +25,17 @@
 <body>
     <div class="container">
         <header class="full">
-            <h1 >Linguagem</h1>
+            <h1 >Favoritos</h1>
         </header>
         <nav class="full">
             <a class="a" href="lobby.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Início</a>
-            <a class="a" href="area.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Área</a>
-            <a class="a" href="conteudo.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Conteúdo</a>
-            <a class="a" href="linguagem.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>">Linguagem</a>
+            <a class="a" href="area.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Área</a>
+            <a class="a" href="conteudo.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Conteúdo</a>
+            <a class="a" href="linguagem.php?senha=<?php echo $senha?>&nome=<?php echo $nome?>&acao=entrar">Linguagem</a>
         </nav>
         <section class="mid flexc">
             <h1>Materiais</h1>
+            
             <table id="table">
                 <tr>
                     <th>Peculiaridade</th>
@@ -45,7 +43,7 @@
                     <th>Tipo</th>
                 </tr>
                 <?php 
-                    $query = "SELECT * FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us and nome='$nome' and linguagem!=''";
+                    $query = "SELECT material.nome,material.link,material.id,material.linguagem FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us=usuario.nome and usuario.nome='$nome' and material.linguagem!=''";
                     $query_run = mysqli_query($conn, $query);
                     if(mysqli_num_rows($query_run) > 0)
                         {
@@ -60,7 +58,7 @@
                                 <?php
                             }
                         }
-                    $query = "SELECT * FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us and nome='$nome' and conteudo!=''";
+                    $query = "SELECT material.nome,material.link,material.id,material.conteudo FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us=usuario.nome and usuario.nome='$nome' and material.conteudo!=''";
                     $query_run = mysqli_query($conn, $query);
                     if(mysqli_num_rows($query_run) > 0)
                         {
@@ -75,7 +73,7 @@
                                 <?php
                             }
                         }
-                    $query = "SELECT * FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us and nome='$nome' and area!=''";
+                    $query = "SELECT material.nome,material.link,material.id,material.area FROM material,usuario,usuario_material where material.id=usuario_material.id_mat and usuario_material.nome_us=usuario.nome and usuario.nome='$nome' and material.area!=''";
                     $query_run = mysqli_query($conn, $query);    
                     if(mysqli_num_rows($query_run) > 0)
                         {
@@ -91,10 +89,7 @@
                             }
                         }
             ?>
-            ?>
-
         </section>
-        
 
     </div>
 </body>
